@@ -1,7 +1,13 @@
-# DFA que acepta numero par de a's
+# Team Message:
+# This code is an implementation of a DFA
+# To make this implementation work in our main.py file we need to generate the dictionary keys and
+# values when reading the file
 
-# dictionary where keys are the states and alphabet values
-# for example DFA[0]['a'] returns the value of the next state, starting from 0 and making a transition with 'a'
+# Implementation of DFA that accepts even number of a's
+
+# dictionary with "dictionary values" where keys are the states of the DFA
+# for example DFA[0]['a'] returns the value of the next state, starting from
+# 0 and making a transition with 'a'
 DFA = { 0:{'a':1, 'b':0},
         1:{'a':0, 'b':1} }
 

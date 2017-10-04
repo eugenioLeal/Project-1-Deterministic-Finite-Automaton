@@ -1,3 +1,5 @@
+# Esta es una copia del main.py para que puedas probar y que no haya conflictos con
+# github en el merge
 import csv
 
 
