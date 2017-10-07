@@ -1,54 +1,70 @@
-import csv
-
-
+# Read .txt file
 print("Reading Text File....")
 with open("DFA.txt", 'r') as fileStream:
-    # Reading each line and storing it in variables
-    states = fileStream.readline()
-    alphabet = fileStream.readline()
-    initialState = fileStream.readline()
-    acceptingStates = fileStream.readline()
-    # Keep reading file until the last line and somehow save all the transition Functions
-    '''
-    # Testing
-    transitionFunctions = fileStream.readline()
+    # Reading each line and storing first 4 lines in lists
+    states = fileStream.readline().split(',')
+    alphabet = fileStream.readline().split(',')
+    initialState = fileStream.readline().split(',')
+    acceptingStates = fileStream.readline().split(',')
+    # Keep reading file until the last line and save all the transition Functions
+    transitionFunctions = []
     for line in fileStream:
-        transitionFunctions.append(fileStream.readline())
-    '''
-
-
+        transitionFunctions.append(line.split(','))
 fileStream.close()
 
-print("States = ", states)
-print("Alphabet = ", alphabet)
-print("Initial State = ", initialState)
-print("Accepting States = ", acceptingStates)
-# We need to read all the transition functions from the file
-# print("Transition Function = ", transitionFunctions)
+# This lines remove the \n (the last element) of each list
+states = states[:-1]
+alphabet = alphabet[:-1]
+initialState = initialState[:-1]
+acceptingStates = acceptingStates[:-1]
+row = 0;
+while row < len(transitionFunctions):
+    transitionFunctions[row] = transitionFunctions[row][:-1]
+    row += 1
+
+# Printing all the data gathered from the file
+def printData():
+    print("States = ", states)
+    print("Alphabet = ", alphabet)
+    print("Initial State = ", initialState)
+    print("Accepting States = ", acceptingStates)
+    # We need to read all the transition functions from the file
+    print("Transition Functions = ", transitionFunctions)
+# Comment/Uncomment printData() to Hide/Show the data gathered from the file
+printData()
+
+# Building a dictionary with "dictionary values" (dictionary of dictionaries) where the first keys are the states of the DFA
+# example of DFA with two states: DFA = { 'current_state1': {'transition': next_state}, 'current_state2': {'transition': next_state} }
+# for example DFA[0]['a'] returns the value of the next state, starting from
+# 0 and making a transition with 'a'
+DFA = {}
+
+# Creating nested dictionaries for each state
+for i in states:
+    DFA[i] = {}
+# Assigning nested keys and values
+for i in transitionFunctions:
+    DFA[i[0]][i[1]] = i[2]
+
+print("DFA: ", DFA)
 
 
+def accepts(dfa, initial, accepting, String):
+    # initializing the value of current state as initial
+    state = initial
+    for c in String:
+        # c represents value of alphabet in this case (a or b)
+        state = dfa[state][c]
+    # if the last transition is in one of the accepting states return true
+    return state in accepting
 
-'''
-# Testing file i/o
-with open('DFA.csv', newline='') as csvfile:
-    reader = csv.reader(csvfile, delimiter=',')
-    fileList = []
-    i = 0
-    while i < 3
-    next()
-    for row in reader:
-        print(row)
-'''
-'''
-print("Testing with csv file")
-with open('DFA.csv', newline='') as csvfile:
-    spamreader = csv.reader(csvfile, delimiter=' ', quotechar='|')
-    for row in spamreader:
-        print(row)
-'''
-'''
-print("\n")
-f = open("DFA.csv", newline='')
-for row in csv.reader(f):
-    print(row)
-'''
+keepChecking = True
+while keepChecking :
+    String = input("Enter a string to be checked by DFA: ")
+    if accepts(DFA, initialState[0], acceptingStates, String) :
+        print("accepted")
+    else:
+        print("rejected")
+    continueChecking = input("Do you want to try with another string? (y/n) ")
+    if continueChecking != 'y' or continueChecking != "yes" or continueChecking != "Y" or continueChecking != "YES":
+        keepChecking = False

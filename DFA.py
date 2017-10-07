@@ -1,9 +1,8 @@
-# Team Message:
+# Message:
 # This code is a working implementation of a DFA
 # To make this implementation work in our main.py file we need to generate the dictionary keys and
 # values when reading the file
-
-
+# status : completed
 
 # This implementation uses dictionary with "dictionary values" where the first keys are the states of the DFA
 # for example DFA[0]['a'] returns the value of the next state, starting from
@@ -31,7 +30,7 @@ def accepts(dfa, initial, accepting, String):
     return state in accepting
 
 print("even_A_DFA accepts \"aab\" ?", accepts(even_A_DFA,0,{0},'aab'))
-print("even_A_DFA accepts \"a\" ?", accepts(even_A_DFA,0,{0},'a'))
+print("even_A_DFA accepts \"a\" ?", accepts(even_A_DFA,0,[0],'a'))
 print("even_A_DFA accepts \"aabaa\" ?", accepts(even_A_DFA,0,{0},'aabaa'))
 
 # The diffference between even_A_DFA and odd_1_DFA in accepts() function is the accept states (third parameter)
