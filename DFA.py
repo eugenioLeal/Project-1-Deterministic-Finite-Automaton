@@ -8,8 +8,8 @@
 # for example DFA[0]['a'] returns the value of the next state, starting from
 # 0 and making a transition with 'a'
 # DFA that accepts even number of a's
-even_A_DFA = { 0:{'a':1, 'b':0},
-               1:{'a':0, 'b':1} }
+even_A_DFA = { 'q0':{'a':'q1', 'b':'q0'},
+               'q1':{'a':'q0', 'b':'q1'} }
 # DFA that accepts odd number of 1's
 odd_1_DFA = { 0:{'1':1, '0':0},
               1:{'1':0, '0':1} }
@@ -29,10 +29,10 @@ def accepts(dfa, initial, accepting, String):
     # if the last transition is in one of the accepting states return true
     return state in accepting
 
-print("even_A_DFA accepts \"aab\" ?", accepts(even_A_DFA,0,{0},'aab'))
-print("even_A_DFA accepts \"a\" ?", accepts(even_A_DFA,0,[0],'a'))
-print("even_A_DFA accepts \"aabaa\" ?", accepts(even_A_DFA,0,{0},'aabaa'))
-
+#print("even_A_DFA accepts \"aab\" ?", accepts(even_A_DFA,0,{0},'aab'))
+#print("even_A_DFA accepts \"a\" ?", accepts(even_A_DFA,0,[0],'a'))
+#print("even_A_DFA accepts \"aabaa\" ?", accepts(even_A_DFA,0,{0},'aabaa'))
+print(even_A_DFA['q0']['a'])
 # The diffference between even_A_DFA and odd_1_DFA in accepts() function is the accept states (third parameter)
 # accepted states = estados finales
 print("odd_1_DFA accepts \"000001000101\" ?", accepts(odd_1_DFA,0,{1},'000001000101'))

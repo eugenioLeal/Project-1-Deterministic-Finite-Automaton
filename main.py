@@ -9,6 +9,7 @@ with open("DFA.txt", 'r') as fileStream:
     # Keep reading file until the last line and save all the transition Functions
     transitionFunctions = []
     for line in fileStream:
+        line = line.replace(':',',')
         transitionFunctions.append(line.split(','))
 fileStream.close()
 
@@ -50,11 +51,17 @@ print("DFA: ", DFA)
 
 
 def accepts(dfa, initial, accepting, String):
+    print("Resulting Transition Functions:")
     # initializing the value of current state as initial
     state = initial
     for c in String:
+        print(state + ", ", end="")
+        #print("q" + state + ", ", end="") # this line was used when the states in file didn't include a 'q'
+        print(c + ": ", end="")
         # c represents value of alphabet in this case (a or b)
         state = dfa[state][c]
+        #print("q" + state) # this line was used when the states in file didn't include a 'q'
+        print(state)
     # if the last transition is in one of the accepting states return true
     return state in accepting
 
@@ -66,5 +73,7 @@ while keepChecking :
     else:
         print("rejected")
     continueChecking = input("Do you want to try with another string? (y/n) ")
-    if continueChecking != 'y' or continueChecking != "yes" or continueChecking != "Y" or continueChecking != "YES":
+    if continueChecking == 'y' or continueChecking == "yes" or continueChecking == "Y" or continueChecking == "YES":
+        keepChecking = True
+    else:
         keepChecking = False
